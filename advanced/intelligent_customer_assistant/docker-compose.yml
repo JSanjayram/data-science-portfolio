@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  assistant:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - CONFIG_PATH=/app/config/production.yaml
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    restart: unless-stopped
+    
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - assistant
+    restart: unless-stopped

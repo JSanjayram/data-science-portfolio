@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Models and Data
+*.pkl
+*.h5
+*.hdf5
+*.db
+*.sqlite3
+
+# Large datasets (keep small sample data)
+*.csv
+!*sample*.csv
+!*demo*.csv
+*.xlsx
+*.json
+!config*.json
+!package*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker
+.dockerignore
+
+# Images (keep only small samples)
+*.jpg
+*.jpeg
+*.png
+!*sample*.jpg
+!*demo*.png

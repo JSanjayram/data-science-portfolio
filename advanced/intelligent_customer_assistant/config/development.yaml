@@ -1,0 +1,31 @@
+app:
+  name: "Intelligent Customer Assistant"
+  version: "1.0.0"
+  debug: true
+  host: "0.0.0.0"
+  port: 5000
+
+model:
+  confidence_threshold: 0.6
+  max_features: 1000
+  ngram_range: [1, 2]
+  min_df: 2
+  max_df: 0.8
+
+data:
+  dataset_size: 500
+  test_size: 0.2
+  random_state: 42
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+intents:
+  - "password_reset"
+  - "order_status" 
+  - "billing_issue"
+  - "product_info"
+  - "technical_support"
+  - "return_refund"
+  - "account_management"

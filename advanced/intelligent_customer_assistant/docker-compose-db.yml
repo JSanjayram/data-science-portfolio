@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: sales_analytics_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sales_analytics
+      MYSQL_USER: sales_user
+      MYSQL_PASSWORD: sales_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database_schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./sample_data.sql:/docker-entrypoint-initdb.d/02-data.sql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: sales_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: sales_user
+      PMA_PASSWORD: sales_password
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

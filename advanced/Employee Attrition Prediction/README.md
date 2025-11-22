@@ -1,0 +1,55 @@
+# Employee Attrition Prediction System
+
+A machine learning-powered web application that predicts employee attrition risk using interactive visualizations and real-time predictions.
+
+## Features
+
+- **Interactive Prediction Interface**: Input employee details and get instant attrition risk predictions
+- **Animated Background**: Beautiful SVG wave animations optimized for all screen sizes
+- **Mobile Responsive**: Fully optimized for mobile devices with dynamic viewport handling
+- **Multiple Views**: 
+  - Prediction interface with customizable employee parameters
+  - Dataset overview with key statistics
+  - Model insights and performance metrics
+
+## Tech Stack
+
+- **Frontend**: Streamlit with custom CSS/HTML
+- **Machine Learning**: Random Forest Classifier with scikit-learn
+- **Data Processing**: Pandas, NumPy
+- **Visualization**: Custom SVG animations
+- **Styling**: Responsive CSS with mobile-first design
+
+## Installation
+
+1. Clone the repository
+2. Install required dependencies:
+   ```bash
+   pip install streamlit pandas numpy scikit-learn
+   ```
+3. Ensure the dataset file `WA_Fn-UseC_-HR-Employee-Attrition.csv` is in the project directory
+4. Run the application:
+   ```bash
+   streamlit run streamlit_app_fixed.py
+   ```
+
+## Usage
+
+1. **Prediction Page**: Enter employee details using the interactive sliders and dropdowns
+2. **Dataset Overview**: View key statistics and insights from the training data
+3. **Model Insights**: Explore model performance and feature importance
+
+## Model Details
+
+- **Algorithm**: Random Forest Classifier
+- **Features**: Age, income, job satisfaction, work-life balance, and more
+- **Preprocessing**: Automatic handling of categorical variables and feature scaling
+- **Performance**: Balanced class weights for handling imbalanced data
+
+## Mobile Optimization
+
+The application is fully optimized for mobile devices with:
+- Dynamic viewport height (100dvh) support
+- Responsive layout adjustments
+- Touch-friendly interface elements
+- Optimized SVG scaling for all screen sizes

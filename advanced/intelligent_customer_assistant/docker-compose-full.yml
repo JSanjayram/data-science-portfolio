@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    container_name: assistant_postgres
+    environment:
+      POSTGRES_DB: assistant_db
+      POSTGRES_USER: assistant_user
+      POSTGRES_PASSWORD: assistant_pass
+      POSTGRES_MULTIPLE_DATABASES: company_db,ecommerce_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - assistant_network
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: assistant_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - assistant_network
+
+  # Assistant Application
+  assistant_app:
+    build: .
+    container_name: assistant_app
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://assistant_user:assistant_pass@postgres:5432/assistant_db
+      - COMPANY_DB_URL=postgresql://assistant_user:assistant_pass@postgres:5432/company_db
+      - ECOMMERCE_DB_URL=postgresql://assistant_user:assistant_pass@postgres:5432/ecommerce_db
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - assistant_network
+    volumes:
+      - ./data/exports:/app/data/exports
+
+volumes:
+  postgres_data:
+
+networks:
+  assistant_network:
+    driver: bridge

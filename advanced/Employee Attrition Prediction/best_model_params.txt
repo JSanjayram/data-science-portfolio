@@ -1,0 +1,4 @@
+Best Model: Logistic Regression
+Best Parameters: {'C': 10, 'penalty': 'l1', 'solver': 'liblinear'}
+Best CV F1-Score: 0.5488
+Test F1-Score: 0.4658
